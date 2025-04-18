@@ -1,0 +1,2 @@
+cargo build --target wasm32-unknown-unknown --release --manifest-path ./projects/rust/Cargo.toml;
+wasm-bindgen ./projects/rust/target/wasm32-unknown-unknown/release/jack_library.wasm --out-dir ./dist/pkg --target web;
