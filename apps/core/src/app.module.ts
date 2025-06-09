@@ -1,10 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { OllamaModule } from './modules/ollama/ollama.module';
 
-@Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
-})
+@Module({ imports: [OllamaModule] })
 export class AppModule {}
