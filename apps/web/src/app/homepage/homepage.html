@@ -1,0 +1,28 @@
+<div class="chat-container d-flex flex-column shadow">
+  <div class="chat-messages flex-grow-1">
+    @for (message of messages(); track message) {
+      @if (message.role == 'user') {
+      <div class="chat-message user d-flex justify-content-end">
+        <div class="message">{{ message.message }}</div>
+      </div>
+      } @else {
+      <div class="chat-message other d-flex">
+        <div class="message">{{message.message}}</div>
+      </div>
+      }
+    }
+    @if (loading()) {
+    <div class="loader-wrapper" id="loader">
+      <output class="spinner-border text-primary">
+        <span class="visually-hidden">Loading...</span>
+      </output>
+    </div>
+    }
+  </div>
+  <div class="chat-input">
+    <form class="d-flex" action="javascript:void(0);">
+      <input type="text" class="form-control me-2" placeholder="Type your message..." [value]="textarea.value" (input)="interaction($event)" [disabled]="loading()" />
+      <button class="btn btn-primary" type="submit" (click)="next()" (submit)="next()">Send</button>
+    </form>
+  </div>
+</div>

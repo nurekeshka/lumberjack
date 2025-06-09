@@ -7,10 +7,9 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "nest start",
-		"start:dev": "nest start --watch",
+		"dev": "nest start --watch",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node ../../dist/core/main",
-		"dev": "nest start",
 		"build": "nest build",
 		"format": "biome format --write",
 		"lint": "biome lint --write",
