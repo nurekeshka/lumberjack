@@ -8,6 +8,6 @@ export class OllamaController {
 
 	@Get('message')
 	async message(@Query('content') content: string): Promise<unknown> {
-		return {message: await this.service.message(content)};
+		return { message: await this.service.message(content) };
 	}
 }
