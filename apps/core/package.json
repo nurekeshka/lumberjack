@@ -1,0 +1,21 @@
+{
+	"name": "@lumberjack/core",
+	"version": "0.0.1",
+	"description": "",
+	"author": "",
+	"private": true,
+	"license": "MIT",
+	"scripts": {
+		"start": "nest start",
+		"start:dev": "nest start --watch",
+		"start:debug": "nest start --debug --watch",
+		"start:prod": "node ../../dist/core/main",
+		"dev": "nest start",
+		"build": "nest build",
+		"check-types": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+		"lint": "biome lint --write",
+		"test": "vitest run",
+		"test:watch": "vitest watch",
+		"test:cov": "vitest run --coverage"
+	}
+}

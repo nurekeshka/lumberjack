@@ -1,0 +1,49 @@
+{
+	"compilerOptions": {
+		/* Language & Environment */
+		"target": "ES2022",
+		"lib": ["ES2022"],
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		/* Strictness */
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"exactOptionalPropertyTypes": true,
+		"noUncheckedIndexedAccess": true,
+		/* Typing Enchancements */
+		"useUnknownInCatchVariables": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		/* Imports and Modules */
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		/* Code Quality */
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		/* Building */
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"removeComments": true,
+		/* Structure */
+		"composite": true,
+		/* Others */
+		"emitDeclarationOnly": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"importHelpers": true,
+		"noEmitOnError": true,
+		"noUnusedLocals": true,
+		/* Paths Aliases */
+		"paths": {
+			"@apps/core/*": ["./apps/core/src/*"],
+			"@apps/web/*": ["./apps/web/src/*"],
+			"@packages/node": ["./packages/node/src/index.ts"],
+			"@packages/interface": ["./packages/auth/src/index.ts"],
+			"@packages/connection": ["./packages/config/src/index.ts"]
+		}
+	}
+}
