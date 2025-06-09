@@ -9,7 +9,7 @@
 		"start": "turbo run dev",
 		"test": "turbo run test",
 		"lint": "turbo run lint",
-		"check-types": "turbo run check-types"
+		"format": "turbo run format"
 	},
 	"workspaces": [
 		"apps/*",

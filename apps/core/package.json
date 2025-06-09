@@ -12,7 +12,7 @@
 		"start:prod": "node ../../dist/core/main",
 		"dev": "nest start",
 		"build": "nest build",
-		"check-types": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+		"format": "biome format --write",
 		"lint": "biome lint --write",
 		"test": "vitest run",
 		"test:watch": "vitest watch",
