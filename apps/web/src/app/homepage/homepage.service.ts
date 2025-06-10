@@ -7,13 +7,10 @@ import type { Observable } from 'rxjs';
 export class HomepageService {
 	private readonly http = inject(HttpClient);
 
-	send(query: string): Observable<OllamaResponse> {
+	send(query: string, file: string): Observable<OllamaResponse> {
 		return this.http.post<OllamaResponse>(
 			'http://localhost:8080/ollama/prompt',
-			{
-				file: 'Just answer the question below',
-				query,
-			},
+			{ file, query },
 		);
 	}
 }

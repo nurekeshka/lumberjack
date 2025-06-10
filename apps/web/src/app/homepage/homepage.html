@@ -1,6 +1,7 @@
-<div class="chat-container d-flex flex-column shadow">
-  <div class="chat-messages flex-grow-1">
-    @for (message of messages(); track message) {
+<div class="d-flex flex-row">
+  <div class="w-50 d-flex flex-column border vh-100">
+    <div class="flex-grow-1 overflow-y-auto p-3">
+      @for (message of messages(); track message) {
       @if (message.role == 'user') {
       <div class="chat-message user d-flex justify-content-end">
         <div class="message">{{ message.message }}</div>
@@ -10,19 +11,24 @@
         <div class="message">{{message.message}}</div>
       </div>
       }
-    }
-    @if (loading()) {
-    <div class="loader-wrapper" id="loader">
-      <output class="spinner-border text-primary">
-        <span class="visually-hidden">Loading...</span>
-      </output>
+      }
+      @if (loading()) {
+      <div class="d-flex justify-content-center align-items-center" id="loader">
+        <output class="spinner-border text-primary">
+          <span class="visually-hidden">Loading...</span>
+        </output>
+      </div>
+      }
     </div>
-    }
+    <div class="p-3 border-top">
+      <form class="d-flex" action="javascript:void(0);">
+        <input type="text" class="form-control me-2" [placeholder]="loading() ? 'Loading...' : 'Type your message...'"
+          [value]="textarea.value" (input)="interaction($event)" [disabled]="loading()" />
+        <button class="btn btn-primary" type="submit" (click)="next()" (submit)="next()">Send</button>
+      </form>
+    </div>
   </div>
-  <div class="chat-input">
-    <form class="d-flex" action="javascript:void(0);">
-      <input type="text" class="form-control me-2" placeholder="Type your message..." [value]="textarea.value" (input)="interaction($event)" [disabled]="loading()" />
-      <button class="btn btn-primary" type="submit" (click)="next()" (submit)="next()">Send</button>
-    </form>
+  <div class="w-50 d-flex flex-column border vh-100">
+    <input type="file" (change)="upload($event)">
   </div>
 </div>

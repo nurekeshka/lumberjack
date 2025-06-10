@@ -25,15 +25,17 @@ export class Homepage {
 		},
 	]);
 
+	private file = '';
+
 	next() {
-		if (!this.textarea.value) return;
+		if (!this.textarea.value || !this.file) return;
 
 		this.loading.set(true);
 		const message = this.textarea.value;
 		this.push({ message, role: 'user' });
 		this.textarea.setValue('');
 
-		this.service.send(message).subscribe({
+		this.service.send(message, this.file).subscribe({
 			next: (response: OllamaResponse) => {
 				this.push({
 					message: response.message,
@@ -53,12 +55,30 @@ export class Homepage {
 		});
 	}
 
-	interaction(event: Event) {
+	interaction(event: Event): void {
 		const element = event.target as HTMLTextAreaElement;
 		this.textarea.setValue(element.value);
 	}
 
 	push(message: Message): void {
 		this.messages.set([...this.messages(), message]);
+	}
+
+	upload(event: Event): void {
+		const element = event.target as HTMLInputElement;
+		const files = element.files;
+
+		if (!files) return;
+
+		const file = files[0];
+		const reader = new FileReader();
+
+		reader.onload = () => {
+			const text = reader.result as string | null;
+			if (!text) return;
+			this.file = text;
+		};
+
+		reader.readAsText(file);
 	}
 }
