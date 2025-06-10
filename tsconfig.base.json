@@ -39,11 +39,7 @@
 		"noUnusedLocals": true,
 		/* Paths Aliases */
 		"paths": {
-			"@apps/core/*": ["./apps/core/src/*"],
-			"@apps/web/*": ["./apps/web/src/*"],
-			"@packages/node": ["./packages/node/src/index.ts"],
-			"@packages/interface": ["./packages/auth/src/index.ts"],
-			"@packages/connection": ["./packages/config/src/index.ts"]
+			"@packages/contract": ["./packages/contracts/src/index.ts"],
 		}
 	}
 }

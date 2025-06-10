@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { HomepageService, type OllamaResponse } from './homepage.service';
+import type { OllamaResponse } from '@packages/contract';
+import { HomepageService } from './homepage.service';
 
 export interface Message {
 	message: string;

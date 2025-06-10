@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import type { OllamaResponse } from '@packages/contract';
 import { Ollama } from 'ollama';
 import { createPrompt, model, system } from './ollama.service.helpers';
 
@@ -14,7 +15,7 @@ export class OllamaService {
 		this.model = model;
 	}
 
-	async prompt(file: string, query: string): Promise<unknown> {
+	async prompt(file: string, query: string): Promise<OllamaResponse> {
 		const user = createPrompt(file, query);
 
 		const res = await this.ollama.chat({

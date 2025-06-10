@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import type { OllamaResponse } from '@packages/contract';
 import type { Observable } from 'rxjs';
-
-export interface OllamaResponse {
-	message: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class HomepageService {
