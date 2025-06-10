@@ -1,4 +1,19 @@
+$system: #e9ecef;
+$users: #0d6efd;
+
 * {
   padding: 0;
   margin: 0;
+}
+
+.bg-system {
+  background-color: $system;
+}
+
+.bg-users {
+  background-color: $users;
+}
+
+.mw-75 {
+  max-width: 75%;
 }
