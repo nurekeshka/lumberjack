@@ -1,17 +1,18 @@
-$system: #e9ecef;
-$users: #0d6efd;
+@use "./styles/colors.scss";
+
+html,
+body {
+  position: fixed;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: none;
+}
 
 * {
   padding: 0;
   margin: 0;
-}
-
-.bg-system {
-  background-color: $system;
-}
-
-.bg-users {
-  background-color: $users;
 }
 
 .mw-75 {
