@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import type { OllamaResponse } from '@packages/contract';
-import { HomepageService } from './homepage.service';
+import { ApiService } from '../../data/api.service';
+import { FileService } from '../../data/file.service';
 
 export interface Message {
 	message: string;
@@ -9,13 +10,16 @@ export interface Message {
 }
 
 @Component({
-	selector: 'app-homepage',
+	selector: 'app-conversation',
 	imports: [ReactiveFormsModule],
-	templateUrl: './homepage.html',
-	styleUrl: './homepage.scss',
+	templateUrl: './conversation.component.html',
+	styleUrl: './conversation.component.scss',
+	host: { class: 'd-flex flex-column border-end' },
 })
-export class Homepage {
-	private readonly service = inject(HomepageService);
+export class ConversationComponent {
+	private readonly connector = inject(ApiService);
+	private readonly files = inject(FileService);
+
 	public readonly textarea = new FormControl({ value: '', disabled: false });
 	public readonly loading = signal(false);
 	public readonly messages = signal<Message[]>([
@@ -25,17 +29,17 @@ export class Homepage {
 		},
 	]);
 
-	private file = '';
+	async next() {
+		const file = await this.files.receive();
 
-	next() {
-		if (!this.textarea.value || !this.file) return;
+		if (!this.textarea.value || !file) return;
 
 		this.loading.set(true);
 		const message = this.textarea.value;
 		this.push({ message, role: 'user' });
 		this.textarea.setValue('');
 
-		this.service.send(message, this.file).subscribe({
+		this.connector.next(message, file).subscribe({
 			next: (response: OllamaResponse) => {
 				this.push({
 					message: response.message,
@@ -62,23 +66,5 @@ export class Homepage {
 
 	push(message: Message): void {
 		this.messages.set([...this.messages(), message]);
-	}
-
-	upload(event: Event): void {
-		const element = event.target as HTMLInputElement;
-		const files = element.files;
-
-		if (!files) return;
-
-		const file = files[0];
-		const reader = new FileReader();
-
-		reader.onload = () => {
-			const text = reader.result as string | null;
-			if (!text) return;
-			this.file = text;
-		};
-
-		reader.readAsText(file);
 	}
 }

@@ -11,6 +11,10 @@
 		"editor.suggest.insertMode": "replace",
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
+	"[scss]": {
+		"editor.suggest.insertMode": "replace",
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
 	"github.copilot.enable": {
 		"*": false,
 		"plaintext": false,
