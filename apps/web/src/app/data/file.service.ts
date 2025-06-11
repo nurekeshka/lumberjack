@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class FileService {
-	private file?: File;
+	file?: File;
 
 	change(file: File): void {
 		this.file = file;

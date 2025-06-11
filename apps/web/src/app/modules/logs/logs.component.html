@@ -1,1 +1,9 @@
+@if (waiting()) {
 <app-button (onchange)="change($event)" />
+} @else {
+<div class="d-flex flex-column gap-1 vh-100 overflow-y-auto">
+  @for (line of lines; track $index) {
+  <span>{{ line }}</span>
+  }
+</div>
+}

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FileService } from '../../data/file.service';
 import { ButtonComponent } from './components/elements/button/button.component';
 
@@ -14,8 +14,14 @@ import { ButtonComponent } from './components/elements/button/button.component';
 })
 export class LogsComponent {
 	private readonly files = inject(FileService);
+	public lines: string[] = [];
 
-	change(file: File): void {
+	waiting = signal(true);
+
+	async change(file: File): Promise<void> {
 		this.files.change(file);
+		this.waiting.set(false);
+		const plain = await this.files.receive();
+		this.lines = plain.split('\n');
 	}
 }
