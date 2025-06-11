@@ -1,10 +1,14 @@
 $system: #e9ecef;
-$users: #0d6efd;
+$users: #4b6584;
 
 .bg-system {
-  background-color: $system;
+  background-color: $system !important;
 }
 
 .bg-users {
-  background-color: $users;
+  background-color: $users !important;
+}
+
+.text-users {
+  color: $users !important;
 }

@@ -3,7 +3,7 @@
 } @else {
 <div class="d-flex flex-column gap-1 vh-100 overflow-y-auto">
   @for (line of lines; track $index) {
-  <span>{{ line }}</span>
+  <code class="text-black">{{ line }}</code>
   }
 </div>
 }

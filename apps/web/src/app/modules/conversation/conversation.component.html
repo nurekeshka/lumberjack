@@ -12,7 +12,7 @@
   }
   @if (loading()) {
   <div class="d-flex justify-content-center align-items-center" id="loader">
-    <output class="spinner-border text-primary">
+    <output class="spinner-border text-users">
       <span class="visually-hidden">Loading...</span>
     </output>
   </div>
@@ -22,7 +22,7 @@
   <form class="d-flex" action="javascript:void(0);">
     <input type="text" class="form-control me-2" [placeholder]="loading() ? 'Loading...' : 'Type your message...'"
       [value]="textarea.value" (input)="interaction($event)" [disabled]="loading()" />
-    <button class="btn btn-primary d-flex justify-content-center align-items-center" type="submit" (click)="next()"
+    <button class="btn bg-users d-flex justify-content-center align-items-center" type="submit" (click)="next()"
       (submit)="next()">
       <img src="/icons/message.svg" alt="Send">
     </button>

@@ -16,10 +16,7 @@ export class FileService {
 				resolve(service.result as string);
 			};
 
-			service.onabort = () => {
-				reject(Error("File can't be read"));
-			};
-
+			service.onerror = reject;
 			service.readAsText(this.file as File);
 		});
 	}
