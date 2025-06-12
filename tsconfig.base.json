@@ -40,7 +40,7 @@
 		/* Paths Aliases */
 		"paths": {
 			"@packages/contract": ["./packages/contracts/src/index.ts"],
-			"@packages/nlp": ["./packages/nlp/src/index.ts"],
+			"@packages/language": ["./packages/language/src/index.ts"],
 		}
 	}
 }

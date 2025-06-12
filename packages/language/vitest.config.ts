@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
 	appType: 'custom',
 	test: {
-		name: 'nlp',
+		name: 'language',
 		globals: true,
 		environment: 'node',
 		include: ['./**/*.spec.ts'],
