@@ -53,26 +53,6 @@ export class LogsComponent implements AfterViewInit {
 						: el;
 				}
 			}
-
-			for (const code of this.elements()) {
-				const datetime = RegExp(/\[([^\]]+)\]/).exec(
-					code.nativeElement.textContent ?? '',
-				);
-
-				if (!datetime) {
-					continue;
-				}
-
-				const logs = this.nlps.date(datetime[1]);
-
-				if (!logs) return;
-
-				if (Math.abs(timestamp - logs.getTime()) <= 3 * 60 * 1000)
-					code.nativeElement.scrollIntoView({
-						behavior: 'smooth',
-						block: 'center',
-					});
-			}
 		});
 	}
 }

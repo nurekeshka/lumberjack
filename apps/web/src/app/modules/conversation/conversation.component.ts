@@ -54,6 +54,7 @@ export class ConversationComponent {
 					role: 'system',
 				});
 				console.error('Error:', error);
+				this.loading.set(false);
 			},
 			complete: () => {
 				this.loading.set(false);

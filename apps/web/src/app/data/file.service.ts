@@ -24,7 +24,8 @@ export class FileService {
 				this.plain = (service.result as string).split('\n');
 
 				for (const line of this.plain) {
-					const source = RegExp(/\[([^\]]+)\]/).exec(line);
+					const source = line.split('[')[0].trim();
+
 					if (!source) continue;
 
 					const date = this.nlps.date(line);
