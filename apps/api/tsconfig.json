@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@packages/contract": ["../../packages/contracts/src/index.ts"],
+      "@packages/nlp": ["../../packages/nlp/src/index.ts"],
     }
   }
 }

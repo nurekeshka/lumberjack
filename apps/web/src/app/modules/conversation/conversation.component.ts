@@ -30,12 +30,14 @@ export class ConversationComponent {
 	]);
 
 	async next() {
-		const file = await this.files.receive();
+		const file = this.files.plain.join('\n');
 
 		if (!this.textarea.value || !file) return;
 
 		this.loading.set(true);
 		const message = this.textarea.value;
+		this.files.locate(message);
+
 		this.push({ message, role: 'user' });
 		this.textarea.setValue('');
 

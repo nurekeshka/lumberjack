@@ -18,6 +18,7 @@
     "module": "ES2022",
     "paths": {
 			"@packages/contract": ["../../packages/contracts/src/index.ts"],
+      "@packages/nlp": ["../../packages/nlp/src/index.ts"],
 		}
   },
   "angularCompilerOptions": {

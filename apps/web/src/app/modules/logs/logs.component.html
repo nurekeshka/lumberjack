@@ -1,9 +1,11 @@
 @if (waiting()) {
 <app-button (onchange)="change($event)" />
 } @else {
-<div class="d-flex flex-column gap-1 vh-100 overflow-y-auto">
-  @for (line of lines; track $index) {
-  <code class="text-black">{{ line }}</code>
+<div class="d-flex flex-column gap-1 vh-100 overflow-y-auto px-3">
+  @for (entries of timestamps().entries(); track $index) {
+  @for (line of entries[1]; track $index) {
+  <code #logs [id]="entries[0]" class="text-black">{{ line }}</code>
+  }
   }
 </div>
 }

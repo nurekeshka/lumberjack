@@ -1,23 +1,52 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { Subject } from 'rxjs';
+import { NlpService } from './nlp.service';
 
 @Injectable({ providedIn: 'root' })
 export class FileService {
+	private readonly subject = new Subject<string>();
+	readonly observable = this.subject.asObservable();
+
+	private readonly nlps = inject(NlpService);
+
 	file?: File;
+	plain: string[] = [];
 
-	change(file: File): void {
-		this.file = file;
-	}
+	readonly timestamps: Map<number, string[]> = new Map();
 
-	receive(): Promise<string> {
+	change(file: File): Promise<void> {
 		return new Promise((resolve, reject) => {
+			this.file = file;
+
 			const service = new FileReader();
 
 			service.onload = () => {
-				resolve(service.result as string);
+				this.plain = (service.result as string).split('\n');
+
+				for (const line of this.plain) {
+					const source = RegExp(/\[([^\]]+)\]/).exec(line);
+					if (!source) continue;
+
+					const date = this.nlps.date(line);
+					if (!date) continue;
+
+					const timestamp = date.getTime();
+
+					if (!this.timestamps.has(timestamp))
+						this.timestamps.set(timestamp, []);
+
+					this.timestamps.get(timestamp)?.push(line);
+				}
+
+				resolve();
 			};
 
 			service.onerror = reject;
-			service.readAsText(this.file as File);
+			service.readAsText(file);
 		});
+	}
+
+	locate(message: string): void {
+		this.subject.next(message);
 	}
 }

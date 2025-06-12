@@ -1,5 +1,14 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+	type AfterViewInit,
+	Component,
+	type ElementRef,
+	computed,
+	inject,
+	signal,
+	viewChildren,
+} from '@angular/core';
 import { FileService } from '../../data/file.service';
+import { NlpService } from '../../data/nlp.service';
 import { ButtonComponent } from './components/elements/button/button.component';
 
 @Component({
@@ -12,16 +21,58 @@ import { ButtonComponent } from './components/elements/button/button.component';
 			'd-flex flex-column border-left justify-content-center align-items-center',
 	},
 })
-export class LogsComponent {
+export class LogsComponent implements AfterViewInit {
 	private readonly files = inject(FileService);
-	public lines: string[] = [];
+	private readonly nlps = inject(NlpService);
 
+	public timestamps = computed(() => this.files.timestamps);
+
+	elements = viewChildren<ElementRef<HTMLElement>>('logs');
 	waiting = signal(true);
 
 	async change(file: File): Promise<void> {
-		this.files.change(file);
+		await this.files.change(file);
 		this.waiting.set(false);
-		const plain = await this.files.receive();
-		this.lines = plain.split('\n');
+	}
+
+	ngAfterViewInit(): void {
+		this.files.observable.subscribe((message: string) => {
+			const date = this.nlps.date(message);
+			if (!date) return;
+
+			const timestamp = date.getTime();
+
+			for (const datetime of this.timestamps().keys()) {
+				if (timestamp === datetime) {
+					const el = document.getElementById(datetime.toString());
+					return el
+						? el.scrollIntoView({
+								behavior: 'smooth',
+								block: 'center',
+							})
+						: el;
+				}
+			}
+
+			for (const code of this.elements()) {
+				const datetime = RegExp(/\[([^\]]+)\]/).exec(
+					code.nativeElement.textContent ?? '',
+				);
+
+				if (!datetime) {
+					continue;
+				}
+
+				const logs = this.nlps.date(datetime[1]);
+
+				if (!logs) return;
+
+				if (Math.abs(timestamp - logs.getTime()) <= 3 * 60 * 1000)
+					code.nativeElement.scrollIntoView({
+						behavior: 'smooth',
+						block: 'center',
+					});
+			}
+		});
 	}
 }

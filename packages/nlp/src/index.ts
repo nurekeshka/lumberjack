@@ -1,1 +1,1 @@
-export { NlpService } from './nlp.service';
+export { NlpConnector } from './nlp.connector';
