@@ -1,4 +1,5 @@
 {
+	"extends": "./tsconfig.paths.json",
 	"compilerOptions": {
 		/* Language & Environment */
 		"target": "ES2022",
@@ -37,10 +38,5 @@
 		"importHelpers": true,
 		"noEmitOnError": true,
 		"noUnusedLocals": true,
-		/* Paths Aliases */
-		"paths": {
-			"@packages/contract": ["./packages/contracts/src/index.ts"],
-			"@packages/language": ["./packages/language/src/index.ts"],
-		}
 	}
 }

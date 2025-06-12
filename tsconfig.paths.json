@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "paths": {
+			"@packages/contract": ["./packages/contracts/src/index.ts"],
+			"@packages/language": ["./packages/language/src/index.ts"],
+		}
+  }
+}
