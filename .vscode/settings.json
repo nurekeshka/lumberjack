@@ -15,6 +15,13 @@
 		"editor.suggest.insertMode": "replace",
 		"editor.defaultFormatter": "vscode.css-language-features"
 	},
+	"[json]": {
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"editor.suggest.insertMode": "replace",
+		"editor.defaultFormatter": "biomejs.biome"
+	},
 	"github.copilot.enable": {
 		"*": false,
 		"plaintext": false,
