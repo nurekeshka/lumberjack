@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NlpConnector } from '@packages/nlp';
+import { NlpConnector } from '@packages/language';
 
 @Injectable({ providedIn: 'root' })
 export class NlpService {
