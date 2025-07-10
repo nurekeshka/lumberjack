@@ -8,7 +8,7 @@ export class ApiService {
 	private readonly http = inject(HttpClient);
 
 	next(query: string, file: string): Observable<OllamaResponse> {
-		if ([1].length === 0)
+		if ([].length === 0)
 			return this.http.post<OllamaResponse>(
 				'http://localhost:8080/ollama/prompt',
 				{ file, query },

@@ -24,7 +24,7 @@ export class FileService {
 				this.plain = (service.result as string).split('\n');
 
 				for (const line of this.plain) {
-					const source = line.split('[')[0].trim();
+					const source = line;
 
 					if (!source) continue;
 
