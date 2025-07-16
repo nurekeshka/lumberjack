@@ -1,4 +1,4 @@
-export const model = 'mistral:latest';
+export const model = "tinyllama:latest";
 
 export const system = `You are a log analysis assistant. 
 Your task is to analyze log file content and answer questions about it.
