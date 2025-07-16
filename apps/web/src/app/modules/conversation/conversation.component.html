@@ -2,20 +2,13 @@
   @for (message of messages(); track message) {
   @if (message.role == 'user') {
   <div class="d-flex justify-content-end align-self-end mb-2">
-    <div class="d-inline bg-users rounded px-3 py-2 text-white mw-75">{{ message.message }}</div>
+    <div class="d-inline bg-users rounded px-3 py-2 text-white mw-75 w-space-pre-wrap">{{ message.message }}</div>
   </div>
   } @else {
   <div class="d-flex align-self-start mb-2">
-    <div class="d-inline bg-system rounded px-3 py-2 mw-75">{{message.message}}</div>
+    <div class="d-inline bg-system rounded px-3 py-2 mw-75 w-space-pre-wrap">{{message.message}}</div>
   </div>
   }
-  }
-  @if (loading()) {
-  <div class="d-flex justify-content-center align-items-center" id="loader">
-    <output class="spinner-border text-users">
-      <span class="visually-hidden">Loading...</span>
-    </output>
-  </div>
   }
 </div>
 <div class="p-3 border-top">

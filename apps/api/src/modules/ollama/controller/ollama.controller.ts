@@ -1,5 +1,5 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
-import type { OllamaResponse } from '@packages/contract';
+import { Body, Controller, Inject, Post, Response } from '@nestjs/common';
+import type { Response as ResponseExpress } from 'express';
 import { OllamaService } from '../service/ollama.service';
 
 interface PromptRequest {
@@ -13,7 +13,20 @@ export class OllamaController {
 	private readonly service: OllamaService;
 
 	@Post('prompt')
-	prompt(@Body() body: PromptRequest): Promise<OllamaResponse> {
-		return this.service.prompt(body.file, body.query);
+	async prompt(
+		@Body() body: PromptRequest,
+		@Response() res: ResponseExpress,
+	): Promise<void> {
+		res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+		res.setHeader('Transfer-Encoding', 'chunked');
+
+		const stream = await this.service.prompt(body.file, body.query);
+
+		for await (const chunk of stream) {
+			const text = chunk.message?.content ?? '';
+			res.write(text);
+		}
+
+		res.end();
 	}
 }

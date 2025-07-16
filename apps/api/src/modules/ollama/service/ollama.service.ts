@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { OllamaResponse } from '@packages/contract';
-import { Ollama } from 'ollama';
+import { type AbortableAsyncIterator, type ChatResponse, Ollama } from 'ollama';
 import { createPrompt, model, system } from './ollama.service.helpers';
 
 @Injectable()
@@ -15,17 +14,18 @@ export class OllamaService {
 		this.model = model;
 	}
 
-	async prompt(file: string, query: string): Promise<OllamaResponse> {
+	prompt(
+		file: string,
+		query: string,
+	): Promise<AbortableAsyncIterator<ChatResponse>> {
 		const user = createPrompt(file, query);
-
-		const res = await this.ollama.chat({
+		return this.ollama.chat({
 			model: this.model,
+			stream: true,
 			messages: [
 				{ role: 'system', content: this.system },
 				{ role: 'user', content: user },
 			],
 		});
-
-		return { message: res.message.content };
 	}
 }

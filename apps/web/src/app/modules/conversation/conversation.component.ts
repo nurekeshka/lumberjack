@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import type { OllamaResponse } from '@packages/contract';
 import { ApiService } from '../../data/api.service';
 import { FileService } from '../../data/file.service';
 
@@ -29,7 +28,30 @@ export class ConversationComponent {
 		},
 	]);
 
-	async next() {
+	async streamChatResponse(prompt: string, onData: (text: string) => void) {
+		const response = await fetch('http://localhost:3000/chat', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ prompt }),
+		});
+
+		const reader = response.body?.getReader();
+		const decoder = new TextDecoder();
+
+		if (!reader) throw new Error('No response body');
+
+		while (true) {
+			const { done, value } = await reader.read();
+			if (done) break;
+
+			const chunk = decoder.decode(value, { stream: true });
+			onData(chunk); // Send streamed text to the component
+		}
+	}
+
+	next() {
 		const file = this.files.plain.join('\n');
 
 		if (!this.textarea.value || !file) return;
@@ -38,28 +60,16 @@ export class ConversationComponent {
 		const message = this.textarea.value;
 		this.files.locate(message);
 
-		this.push({ message, role: 'user' });
+		this.addMessage('user', message);
 		this.textarea.setValue('');
 
-		this.connector.next(message, file).subscribe({
-			next: (response: OllamaResponse) => {
-				this.push({
-					message: response.message,
-					role: 'system',
-				});
-			},
-			error: (error) => {
-				this.push({
-					message: 'Sorry, something went wrong. Please try again.',
-					role: 'system',
-				});
-				console.error('Error:', error);
-				this.loading.set(false);
-			},
-			complete: () => {
-				this.loading.set(false);
-			},
+		this.addMessage('system');
+
+		void this.connector.next(message, file, (chunk) => {
+			this.appendToLatest(chunk);
 		});
+
+		this.loading.set(false);
 	}
 
 	interaction(event: Event): void {
@@ -67,7 +77,16 @@ export class ConversationComponent {
 		this.textarea.setValue(element.value);
 	}
 
-	push(message: Message): void {
-		this.messages.set([...this.messages(), message]);
+	appendToLatest(plain: string): void {
+		const messages = this.messages();
+		const latest = messages.pop();
+		if (!latest) return;
+
+		latest.message += plain;
+		this.messages.set([...messages, latest]);
+	}
+
+	addMessage(role: Message['role'], message: string = ''): void {
+		this.messages.set([...this.messages(), { message, role }]);
 	}
 }
