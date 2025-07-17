@@ -1,0 +1,212 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{multirow}
+\usetikzlibrary{positioning}
+\usepackage{hyperref}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Title of your Report\\
+}
+
+\author{\IEEEauthorblockN{Your Name}
+\IEEEauthorblockA{\textit{Department of  Business} \\
+\textit{Univ. of Europe for Applied Sciences}\\
+Potsdam 14469, Germany \\
+<YourEmail>@ue-germany.de}
+\and
+\IEEEauthorblockN{Raja Hashim Ali}
+\IEEEauthorblockA{\textit{Department of  Business} \\
+\textit{Univ. of Europe for Applied Sciences}\\
+Potsdam 14469, Germany \\
+hashim.ali@ue-germany.de}
+}
+
+\maketitle
+
+\begin{abstract}
+*CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, or Math in Report Title or Abstract.
+
+Two sentences of background and importance of this topic.
+
+Two sentences defining the gap analysis (work not done in field) and your problem statement.
+
+Two sentences on how you performed your experimentation and the overall methodology deployed in this study.
+
+Two sentences of Results and your findings.
+
+One sentence for significance of the results and your contribution.
+
+In total, this section must consist of 180 words.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+\textcolor{red}{keyword1, keyword2, keyword3, keyword4}
+\end{IEEEkeywords}
+
+\section{General instructions}
+\textcolor{red}{This section is a a set of generalized instructions for writing a journal paper.
+Read these instructions carefully, and delete this section and its text after completing the write up.
+\begin{enumerate}
+    \item \textbf{SECTIONS:} You must have exactly the mentioned sections with the given (or more) number of paragraphs.
+    \item \textbf{TEMPLATE:} Do not delete any text from any of the sections (except General Instructions) in this template. Comment out the text and write your text in the next lines after the commented out text. 
+    \item \textbf{PAGE LIMITS:} Observe the report page limits (minimum 12 or more pages without citations/references). 
+    \item \textbf{PARAGRAPHS:} Each paragraph must consist of 7-10 sentences. A sentence consists of full stop ".", not lines.
+    \item \textbf{SENTENCES:} Each sentence should start on a new line in latex text (one sentence per line). 
+    \item \textbf{FIGURES:} Make your figures in Microsoft Visio, Canva, DrawIO and/or Powerpoint only. Save them as PDFs. Barcharts and graphs should be saved directly as pdfs (resolution of image should at least be 300 ppi) as soon as they are generated. Save the code (ipynb, R, other code sources) for generating the figures OR save the source file (ppt, canva, visio file) of the original program. Figures with png or jpeg extension, except for where screenshots are the only option, are not to be used.  
+    \item \textbf{SOURCE FILES:} SAVE ALL SOURCE FILES OF FIGURES OR THEIR LINKS IN THE "Source" FOLDER. In case of figures, keep your raw data table also stored as excel file in this repository.
+    \item \textbf{CODES:} Save all your codes in ``Codes'' folder in the repository.
+    \item \textbf{DATASETS:} Save all your datasets in the ``Datasets'' folder. If dataset is too large (e.g., with images), then save the dataset link in a text file and add this file in the datasets folder.
+    \item \textbf{TABLES:} Generate tables in Excel first, then convert them into latex tables by using https://www.tablesgenerator.com website and pasting the table into the site along with drawing its borders. Copy and paste this table into latex.
+    \item \textbf{REFERENCES:} Add references where required. Use bibliography.bib file for generating references and '\\cite\{\}' command to cite the required work in your write up. Total references should be between 25 and 50. Use latest references with 80\% references later than (not including) 2021. References should preferably be from journals and conferences only (WITH PREFERENCE TO IEEE, Springer, ACM, PloS, Elsevier (ScienceDirect) or MDPI journals/conferences). Preferably no websites, thesis, Researchgate or Arxiv links.
+    \item \textbf{MAIN TEXT REF:} All figures and tables should be referred to in the main text.
+    \item \textbf{CAPTIONS:} All captions for figures and tables should be detailed, and not three to four words. Think of figures with captions to be self explanatory on their own, without the need to read the main text in document. Of course, the detailed discussion is not part of captions, and done in relevant section of main text.
+\end{enumerate}
+}
+
+\section{Introduction}
+One paragraph on introducing the field and the topic of interest.
+
+One paragraph on the importance and applications of the selected topic and why it is significant to work on it in recent times.
+
+\subsection{Related Work}
+One paragraph defining the work that has been done in this field (at least 8 latest works should be cited), with a table summarizing the work that has been done in literature as shown below in Table~\ref{tab:LiteratureSummary}.
+
+\begin{table*}[!ht]
+\label{tab:LiteratureSummary}
+\caption{Literature review table showing the contributions of various authors for quantization of networks.}
+\begin{tabular}{|p{1.5cm}|l|l|l|l|l|l|l|} \hline
+Year Published & Paper Author and Citation & Paper Title   & Dataset Used & Method(s) Used & Results & Contribution(s) & Drawback / Limitations \\ \hline
+ & Narejo~\textit{et al.}~\cite{b1} & Literature 1 &   &   &   &    &   \\ \hline
+ & Nepal~\textit{et al.}~\cite{b2} & Literature 2  &   &    &    &    & \\ \hline
+ & Solawetz~\textit{et al.}~\cite{b4} & Literature 3  &   &   &   &   &   \\ \hline
+ &   & . &   &   &   &   & \\ \hline
+ &   & . &   &   &   &   & \\ \hline
+ &   & . &   &   &   &   & \\ \hline
+ & - & Proposed Work &   &   &   &   & \\ \hline
+\end{tabular}
+\end{table*}
+
+\subsection{Gap Analysis}
+One paragraph defining what has not been done or what is still missing in the field (gap analysis).
+
+\subsection{Problem Statement}
+Following are the main questions addressed in this study.
+
+\begin{enumerate}
+    \item Research Question 1.
+    \item Research Question 2.
+    \item Research Question 3.
+    \item Research Question 4.
+    \item Research Question 5.
+\end{enumerate}
+
+\subsection{Novelty of our work and Our Contributions}
+One paragraph explaining your approach and novelty/contributions of your work.
+
+One paragraph on what you are doing in this report (your contributions) and a small one-two liner summary of your results.
+
+\section{Methodology}
+\subsection{Dataset}
+One paragraph and one figure representing your dataset, also give references (citation) from where the dataset is available, and the labels/ground truth as shown in Figure~\ref{Fig:Figure3}.
+
+\begin{figure}[!ht]
+\centering
+ \includegraphics[width=0.45\textwidth]{Figures/Figure4.pdf}
+\caption{Image showing some sample images present in the dataset, their pixel-wise labels and resulting pixel labels from floating point network, hybrid quantized network, and two configurations of quantized networks. The legend displays the color and class (name) of the object to be identified in the image. Five sample images containing aeroplane, dogs, person, and chair are shown along with their classification. The data and the pixel labels (ground truth) are taken from Pascal VOC 2012 dataset.}
+\label{Fig:Figure4}
+\end{figure}
+
+\subsection{Overall Workflow}
+One paragraphs defining your methodology through a flow diagram of your work as shown in Figure~\ref{Fig:Figure1} OR in Figure~\ref{Fig:Figure2}.
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=17.8cm]{Figures/Figure2.png}
+\caption{Figure showing the flowchart proposed for FCN-8 quantization and the comparison pipeline followed (for quantization techniques, i.e., Direct Quantization, Llyod's Quantizer and $L_2$ error minimization) in the current study based on pixel accuracy, mean IOU, and mean accuracy.}
+\label{Fig:Figure2}
+\end{figure*}
+
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=17.8cm]{Figures/Figure1.pdf}
+\caption{Figure showing the flowchart proposed for FCN-8 quantization and the comparison pipeline followed (for quantization technqiues, i.e., Direct Quantization, Llyod's Quantizer and $L_2$ error minimization) in the current study based on pixel accuracy, mean IOU, and mean accuracy.}
+\label{Fig:Figure1}
+\end{figure*}
+
+\subsection{Experimental Settings}
+One paragraph for hyper-parameter settings and network architecture as shown in Table~\ref{tab:FCNConfiguration} and a figure for network architecture (shown in Fig~\ref{Fig:Figure2}).
+
+\begin{table}[!ht]
+\centering
+\caption{Configuration table showing the network configuration of FCN used in this study. The table shows the various configuration settings used for FCN8.}
+\label{tab:FCNConfiguration} 
+\begin{tabular}{|l|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Network Configuration}} 
+\\ \hline
+Epochs & 50 \\
+Learning rate & 0.0001 \\
+Mini batch size & 20 \\ 
+Optimizer & SGD \\
+Momentum & 0.9 \\
+Weight decay & 0.0002 \\
+$L_2$ Regularization & None \\
+Samples in training set & 8498 \\
+Samples in validation set & 786 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure*}[!ht]
+\centerline{\includegraphics[width=17.8cm]{./Figures/Figure5.png}}
+\caption{Sample network architecture image. Make it in Powerpoint with svg images and save as pdf. Sanity check: Zoom in and pixels should not break.}
+\label{Fig:Figure2}
+\end{figure*}
+
+(Optional) One paragraph for experimental settings of your and competing methods (if any).
+
+\section{Results}
+Three (or more) paragraphs explaining your results. At least one paragraph targeting one research question with at least one figure (preferably) or table (where figure is not possible).
+This section must contain only results and nothing else (not your own opinion or any sort of discussion on quality of results).
+
+A sample figure is shown in Figure~\ref{Fig:Figure6}.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=9cm,keepaspectratio]{Figures/Figure6.pdf}
+\caption{Figure comparing the three quantization techniques Fixed Point (FP), Lloyd's quantizer (LQ) and $L_2$ error minimization ($L_2$) on the three performance metrics divided into encoder and decoder layers. Mean IoU is shown for the three techniques in Panel A), pixel accuracy in Panel B), and mean accuracy in Panel C) respectively. Note that FP is consistently worse than both LQ and $L_2$, while $L_2$ and LQ are of comparable accuracy. Also, FP is most sensitive to number of bits in all metrics while $L_2$ and LQ are relatively insensitive.}
+\label{Fig:Figure6}
+\end{figure}
+
+\section{Discussion}
+Three to four paragraphs discussing the results (at least one paragraph for each research question).
+Your opinion on how good/bad the results are. 
+Draw inferences from the results here.
+Explain novelty of your contributions and what was missing that you have explored here.
+Any other point you would like to discuss related to this study.
+
+\subsection{Future Directions}
+One paragraph for what are the future directions in your opinion for continuing this study.
+
+\section{Conclusion}
+One paragraph related to conclusions drawn from your whole experimentation.
+
+In total this section must consist of 240-260 words.
+
+% DO NOT ADD TEXT OR REMOVE OR EDIT TEXT BELOW THIS POINT
+\bibliographystyle{IEEEtran}
+\bibliography{Bibliography}
+
+\end{document}

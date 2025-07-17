@@ -1,13 +1,18 @@
 <div class="flex-grow-1 overflow-y-auto p-3">
   @for (message of messages(); track message) {
-  @if (message.role == 'user') {
+  @if (message.message !== '') {
+  @switch (message.role) {
+  @case ('user') {
   <div class="d-flex justify-content-end align-self-end mb-2">
     <div class="d-inline bg-users rounded px-3 py-2 text-white mw-75 w-space-pre-wrap">{{ message.message }}</div>
   </div>
-  } @else {
+  }
+  @case ('system') {
   <div class="d-flex align-self-start mb-2">
     <div class="d-inline bg-system rounded px-3 py-2 mw-75 w-space-pre-wrap">{{message.message}}</div>
   </div>
+  }
+  }
   }
   }
 </div>
