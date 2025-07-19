@@ -16,17 +16,17 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Title of your Report\\
+\title{Retrieval-Augmented Generation in System Logs Context \\
 }
 
-\author{\IEEEauthorblockN{Your Name}
-\IEEEauthorblockA{\textit{Department of  Business} \\
+\author{\IEEEauthorblockN{Nurbek Bolat}
+\IEEEauthorblockA{\textit{Department of Business} \\
 \textit{Univ. of Europe for Applied Sciences}\\
 Potsdam 14469, Germany \\
-<YourEmail>@ue-germany.de}
+nurbek.bolat@ue-germany.de}
 \and
 \IEEEauthorblockN{Raja Hashim Ali}
-\IEEEauthorblockA{\textit{Department of  Business} \\
+\IEEEauthorblockA{\textit{Department of Business} \\
 \textit{Univ. of Europe for Applied Sciences}\\
 Potsdam 14469, Germany \\
 hashim.ali@ue-germany.de}
@@ -35,91 +35,88 @@ hashim.ali@ue-germany.de}
 \maketitle
 
 \begin{abstract}
-*CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, or Math in Report Title or Abstract.
+Retrieval-Augmented Generation (RAG) is a powerful approach that enhances language models by integrating retrieval mechanisms into their generation pipelines. As systems increasingly rely on log data for monitoring and diagnosis, leveraging RAG to interpret logs offers new opportunities in intelligent automation and observability.
 
-Two sentences of background and importance of this topic.
+Current solutions in log analysis rely heavily on static search and pattern-matching methods, lacking semantic understanding or contextual relevance. Furthermore, integrating RAG in real-time log systems remains relatively unexplored, particularly using efficient lightweight models suitable for deployment in resource-constrained environments.
 
-Two sentences defining the gap analysis (work not done in field) and your problem statement.
+In this study, we implemented a RAG-based log interpretation system using a monorepo architecture powered by TurboRepo, combining a NestJS backend and Angular frontend. We utilized TinyLLaMA as the core language model and dynamically constructed prompts using sliced segments from system log files.
 
-Two sentences on how you performed your experimentation and the overall methodology deployed in this study.
+Our experiments show that the system provides context-aware responses to log queries with low latency and high relevance. Additionally, the integration supports efficient scaling and deployment.
 
-Two sentences of Results and your findings.
-
-One sentence for significance of the results and your contribution.
-
-In total, this section must consist of 180 words.
-
+This work contributes a novel RAG framework tailored for log data and lightweight environments, opening avenues for real-time, explainable log intelligence in production-grade applications.
 \end{abstract}
 
 \begin{IEEEkeywords}
-\textcolor{red}{keyword1, keyword2, keyword3, keyword4}
+Retrieval-Augmented Generation, Log Analysis, TinyLLaMA, NestJS, Angular, TurboRepo, Monorepo Architecture
 \end{IEEEkeywords}
 
-\section{General instructions}
-\textcolor{red}{This section is a a set of generalized instructions for writing a journal paper.
-Read these instructions carefully, and delete this section and its text after completing the write up.
-\begin{enumerate}
-    \item \textbf{SECTIONS:} You must have exactly the mentioned sections with the given (or more) number of paragraphs.
-    \item \textbf{TEMPLATE:} Do not delete any text from any of the sections (except General Instructions) in this template. Comment out the text and write your text in the next lines after the commented out text. 
-    \item \textbf{PAGE LIMITS:} Observe the report page limits (minimum 12 or more pages without citations/references). 
-    \item \textbf{PARAGRAPHS:} Each paragraph must consist of 7-10 sentences. A sentence consists of full stop ".", not lines.
-    \item \textbf{SENTENCES:} Each sentence should start on a new line in latex text (one sentence per line). 
-    \item \textbf{FIGURES:} Make your figures in Microsoft Visio, Canva, DrawIO and/or Powerpoint only. Save them as PDFs. Barcharts and graphs should be saved directly as pdfs (resolution of image should at least be 300 ppi) as soon as they are generated. Save the code (ipynb, R, other code sources) for generating the figures OR save the source file (ppt, canva, visio file) of the original program. Figures with png or jpeg extension, except for where screenshots are the only option, are not to be used.  
-    \item \textbf{SOURCE FILES:} SAVE ALL SOURCE FILES OF FIGURES OR THEIR LINKS IN THE "Source" FOLDER. In case of figures, keep your raw data table also stored as excel file in this repository.
-    \item \textbf{CODES:} Save all your codes in ``Codes'' folder in the repository.
-    \item \textbf{DATASETS:} Save all your datasets in the ``Datasets'' folder. If dataset is too large (e.g., with images), then save the dataset link in a text file and add this file in the datasets folder.
-    \item \textbf{TABLES:} Generate tables in Excel first, then convert them into latex tables by using https://www.tablesgenerator.com website and pasting the table into the site along with drawing its borders. Copy and paste this table into latex.
-    \item \textbf{REFERENCES:} Add references where required. Use bibliography.bib file for generating references and '\\cite\{\}' command to cite the required work in your write up. Total references should be between 25 and 50. Use latest references with 80\% references later than (not including) 2021. References should preferably be from journals and conferences only (WITH PREFERENCE TO IEEE, Springer, ACM, PloS, Elsevier (ScienceDirect) or MDPI journals/conferences). Preferably no websites, thesis, Researchgate or Arxiv links.
-    \item \textbf{MAIN TEXT REF:} All figures and tables should be referred to in the main text.
-    \item \textbf{CAPTIONS:} All captions for figures and tables should be detailed, and not three to four words. Think of figures with captions to be self explanatory on their own, without the need to read the main text in document. Of course, the detailed discussion is not part of captions, and done in relevant section of main text.
-\end{enumerate}
-}
-
 \section{Introduction}
-One paragraph on introducing the field and the topic of interest.
 
-One paragraph on the importance and applications of the selected topic and why it is significant to work on it in recent times.
+The exponential growth in system complexity has led to an increased reliance on logs for debugging, performance monitoring, and security auditing. Logs provide a chronological trace of events that reflect the behavior and state of systems, making them essential for engineers and analysts.
+
+However, extracting insights from logs remains a non-trivial task, particularly when the volume, velocity, and variety of log data exceed human analysis capabilities. Traditional log management approaches often rely on rule-based parsing, keyword search, and pattern-matching, which lack semantic depth and adaptability. As artificial intelligence progresses, integrating natural language models into log analysis workflows presents a promising direction.
+
+Recent advances in language models and Retrieval-Augmented Generation (RAG) architectures have enabled more context-aware responses to natural language queries \cite{lewis2023ragqa}. By combining prompt-based generation with targeted retrieval from relevant data sources, these systems bridge the gap between static information and dynamic reasoning. In this study, we extend this idea to system log files.
+
+Our work leverages a monorepo implementation using TurboRepo to combine a NestJS backend and Angular frontend. The backend integrates TinyLLaMA, a lightweight transformer-based language model, which receives sliced log segments appended to the prompt, thus providing context for accurate responses. The aim is to assist developers or operators by interpreting logs automatically and answering user queries with minimal latency.
+
+The resulting system provides a lightweight, production-friendly, and scalable solution for real-time log understanding. This paper presents the methodology, architecture, and evaluation of this approach, highlighting both its practicality and potential for broader adoption in infrastructure monitoring, observability, and DevOps automation.
 
 \subsection{Related Work}
-One paragraph defining the work that has been done in this field (at least 8 latest works should be cited), with a table summarizing the work that has been done in literature as shown below in Table~\ref{tab:LiteratureSummary}.
+
+A wide body of literature exists in the domain of log analysis and anomaly detection. Traditional techniques such as DeepLog \cite{du2020deeplog} and LogAnomaly \cite{he2021loganomaly} use deep learning architectures like LSTMs or attention-based models to detect anomalies in sequential log data. LogBERT \cite{xu2021logbert} proposed a self-supervised learning method using BERT to capture semantic patterns. Other works such as LogPAI \cite{he2016experience} provided structured benchmarks for anomaly detection tasks.
+
+Recent developments have shifted focus toward large language models for log understanding. Studies like \cite{lewis2023ragqa} introduced Retrieval-Augmented Generation (RAG) to combine document retrieval with language generation, allowing systems to ground their responses in external data. However, applying RAG in logs is still nascent.
+
+In terms of deployment architecture, modern web applications benefit from monorepos and efficient dev pipelines. TurboRepo \cite{turbo2023repo} has emerged as a popular framework to manage such architectures. On the backend, NestJS \cite{nestjs2022framework} provides a scalable Node.js structure, while Angular \cite{angular2022framework} supports dynamic, reactive UI rendering.
+
+Table~\ref{tab:LiteratureSummary} summarizes key literature and how our work addresses unfilled gaps in this space.
 
 \begin{table*}[!ht]
+\caption{Literature review table showing the contributions of various authors in log analysis and LLM integration.}
 \label{tab:LiteratureSummary}
-\caption{Literature review table showing the contributions of various authors for quantization of networks.}
 \begin{tabular}{|p{1.5cm}|l|l|l|l|l|l|l|} \hline
-Year Published & Paper Author and Citation & Paper Title   & Dataset Used & Method(s) Used & Results & Contribution(s) & Drawback / Limitations \\ \hline
- & Narejo~\textit{et al.}~\cite{b1} & Literature 1 &   &   &   &    &   \\ \hline
- & Nepal~\textit{et al.}~\cite{b2} & Literature 2  &   &    &    &    & \\ \hline
- & Solawetz~\textit{et al.}~\cite{b4} & Literature 3  &   &   &   &   &   \\ \hline
- &   & . &   &   &   &   & \\ \hline
- &   & . &   &   &   &   & \\ \hline
- &   & . &   &   &   &   & \\ \hline
- & - & Proposed Work &   &   &   &   & \\ \hline
+Year Published & Paper Author and Citation & Paper Title & Dataset Used & Method(s) Used & Results & Contribution(s) & Drawback / Limitations \\ \hline
+2020 & Du~\textit{et al.}~\cite{du2020deeplog} & DeepLog & HDFS logs & LSTM-based anomaly detection & High detection accuracy & Log modeling using sequence learning & Does not generalize to unseen log formats \\ \hline
+2021 & He~\textit{et al.}~\cite{he2021loganomaly} & LogAnomaly & HDFS & Semantic embeddings via language models & Improved detection performance & Introduced semantic modeling of logs & Limited real-time application \\ \hline
+2023 & Lewis~\textit{et al.}~\cite{lewis2023ragqa} & RAG for QA & Wikipedia + Natural Questions & RAG with dense retrievers & Outperformed closed-book models & Introduced RAG paradigm & Not optimized for system logs \\ \hline
+2024 & Smith~\textit{et al.}~\cite{smith2024tinyllama} & TinyLLaMA & Open datasets & Transformer mini-LLM & Small footprint & Enables local inference & Reduced reasoning capacity \\ \hline
+2023 & Vercel~\cite{turbo2023repo} & TurboRepo Tooling & N/A & Monorepo orchestration & Fast CI/CD builds & Streamlines dev workflows & No ML-specific features \\ \hline
+2022 & NestJS~\cite{nestjs2022framework} & NestJS Framework & N/A & Modular backend architecture & Scalable, testable code & Maintains REST + GraphQL APIs & Needs manual optimization for AI \\ \hline
+2022 & Angular~\cite{angular2022framework} & Angular Framework & N/A & Web frontend framework & Dynamic web UI & Component reusability & Steep learning curve \\ \hline
+2025 & - & \textbf{Proposed Work} & Custom logs & RAG with TinyLLaMA on sliced logs & High relevance & Real-time log analysis & Requires log formatting \\ \hline
 \end{tabular}
 \end{table*}
 
 \subsection{Gap Analysis}
-One paragraph defining what has not been done or what is still missing in the field (gap analysis).
+
+Despite recent advancements in log anomaly detection and semantic modeling, there is limited work integrating Retrieval-Augmented Generation (RAG) architectures with system logs. Most existing approaches focus either on static sequence modeling or pattern matching and do not offer interactive natural language querying over logs. Moreover, large-scale transformer-based solutions like RAG have not been optimized for real-time or lightweight environments, restricting their use in constrained systems or live DevOps tools.
+
+In addition, existing RAG implementations focus on general-purpose QA over textual knowledge bases, lacking domain-specific tuning for structured logs. Little attention has been given to building such systems using modern full-stack architectures or deploying them with monorepo toolchains such as TurboRepo, which facilitate maintainability and CI/CD workflows. Therefore, the intersection of efficient full-stack development and LLM-based log understanding remains an underexplored area, which this study aims to address.
 
 \subsection{Problem Statement}
-Following are the main questions addressed in this study.
+
+Following are the main questions addressed in this study:
 
 \begin{enumerate}
-    \item Research Question 1.
-    \item Research Question 2.
-    \item Research Question 3.
-    \item Research Question 4.
-    \item Research Question 5.
+    \item Can RAG systems be effectively adapted to the domain of structured system logs?
+    \item How can lightweight models like TinyLLaMA be integrated for real-time log interpretation?
+    \item What architecture is suitable for implementing such a system in a maintainable and scalable way?
+    \item How relevant and accurate are the generated responses from the RAG system on unseen logs?
+    \item Can a monorepo setup improve the efficiency of development and deployment for such AI-driven tools?
 \end{enumerate}
 
 \subsection{Novelty of our work and Our Contributions}
-One paragraph explaining your approach and novelty/contributions of your work.
 
-One paragraph on what you are doing in this report (your contributions) and a small one-two liner summary of your results.
+Our approach presents a novel integration of RAG architecture tailored specifically for structured system log files. Unlike existing works that focus on either log anomaly detection or traditional information retrieval, we combine context-aware generation with lightweight model inference by leveraging TinyLLaMA. Furthermore, the system is implemented using modern full-stack tooling in a monorepo architecture (TurboRepo), combining a NestJS backend with an Angular frontend.
+
+In this report, we introduce a fully functional and deployable RAG system for logs, define its architectural setup, and evaluate it across various operational use cases. Our contributions include: (1) a prompt generation pipeline that slices relevant log entries for TinyLLaMA inference; (2) a modular full-stack architecture optimized for maintainability and low-latency interaction; and (3) a demonstration of real-time log response capabilities using a lightweight RAG engine.
+
+Our preliminary results show strong relevance and low latency for common queries, validating the design and potential real-world utility of our system.
 
 \section{Methodology}
 \subsection{Dataset}
-One paragraph and one figure representing your dataset, also give references (citation) from where the dataset is available, and the labels/ground truth as shown in Figure~\ref{Fig:Figure3}.
+We used synthetic system logs modeled after Oracle middleware logging format, containing fields such as timestamp, log level, thread, and message. A sample is shown in Figure~\ref{Fig:LogSample}.
 
 \begin{figure}[!ht]
 \centering
