@@ -1,3 +1,10 @@
+@if (loading()) {
+<div class="d-flex justify-content-center w-50 position-fixed top-50 left-50">
+  <output class="spinner-border text-users">
+    <span class="visually-hidden">Loading...</span>
+  </output>
+</div>
+}
 <div class="flex-grow-1 overflow-y-auto p-3">
   @for (message of messages(); track message) {
   @if (message.message !== '') {

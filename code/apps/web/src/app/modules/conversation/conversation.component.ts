@@ -1,38 +1,38 @@
-import { Component, inject, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from '../../data/api.service';
-import { FileService } from '../../data/file.service';
+import { Component, inject, signal } from "@angular/core";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { ApiService } from "../../data/api.service";
+import { FileService } from "../../data/file.service";
 
 export interface Message {
 	message: string;
-	role: 'user' | 'system';
+	role: "user" | "system";
 }
 
 @Component({
-	selector: 'app-conversation',
+	selector: "app-conversation",
 	imports: [ReactiveFormsModule],
-	templateUrl: './conversation.component.html',
-	styleUrl: './conversation.component.scss',
-	host: { class: 'd-flex flex-column border-end' },
+	templateUrl: "./conversation.component.html",
+	styleUrl: "./conversation.component.scss",
+	host: { class: "d-flex flex-column border-end" },
 })
 export class ConversationComponent {
 	private readonly connector = inject(ApiService);
 	private readonly files = inject(FileService);
 
-	public readonly textarea = new FormControl({ value: '', disabled: false });
+	public readonly textarea = new FormControl({ value: "", disabled: false });
 	public readonly loading = signal(false);
 	public readonly messages = signal<Message[]>([
 		{
-			message: 'Hello! How can I help you?',
-			role: 'system',
+			message: "Hello! How can I help you?",
+			role: "system",
 		},
 	]);
 
 	async streamChatResponse(prompt: string, onData: (text: string) => void) {
-		const response = await fetch('http://localhost:3000/chat', {
-			method: 'POST',
+		const response = await fetch("http://localhost:3000/chat", {
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ prompt }),
 		});
@@ -40,7 +40,7 @@ export class ConversationComponent {
 		const reader = response.body?.getReader();
 		const decoder = new TextDecoder();
 
-		if (!reader) throw new Error('No response body');
+		if (!reader) throw new Error("No response body");
 
 		while (true) {
 			const { done, value } = await reader.read();
@@ -51,8 +51,8 @@ export class ConversationComponent {
 		}
 	}
 
-	next() {
-		const file = this.files.plain.join('\n');
+	async next() {
+		const file = this.files.plain.join("\n");
 
 		if (!this.textarea.value || !file) return;
 
@@ -60,12 +60,12 @@ export class ConversationComponent {
 		const message = this.textarea.value;
 		this.files.locate(message);
 
-		this.addMessage('user', message);
-		this.textarea.setValue('');
+		this.addMessage("user", message);
+		this.textarea.setValue("");
 
-		this.addMessage('system');
+		this.addMessage("system");
 
-		void this.connector.next(message, file, (chunk) => {
+		await this.connector.next(message, file, (chunk) => {
 			this.appendToLatest(chunk);
 		});
 
@@ -86,7 +86,7 @@ export class ConversationComponent {
 		this.messages.set([...messages, latest]);
 	}
 
-	addMessage(role: Message['role'], message: string = ''): void {
+	addMessage(role: Message["role"], message: string = ""): void {
 		this.messages.set([...this.messages(), { message, role }]);
 	}
 }
